@@ -59,7 +59,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "StudentPO{" +
+        return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
