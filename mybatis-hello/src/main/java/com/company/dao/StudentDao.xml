@@ -22,6 +22,6 @@ sql映射文件(sql mapper):写sql语句的mybatis会执行这些sql
 -->
 <mapper namespace="com.company.dao.StudentDao">
       <select id="selectStudents" resultType="com.company.entity.Student">
-           select id,name,email,age from students order by id;
+           select id,name,email,age from student order by id;
       </select>
 </mapper>
