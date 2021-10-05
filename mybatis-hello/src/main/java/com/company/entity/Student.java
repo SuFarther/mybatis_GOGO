@@ -5,7 +5,7 @@ package com.company.entity;
  * @version 1.0
  * @ClassName Student
  * @company 公司
- * @Description StudentPO实体类,对应数据库里面的字段
+ * @Description Student实体类,对应数据库里面的字段
  * @createTime 2021年10月05日 22:09:09
  */
 public class Student {
