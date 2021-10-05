@@ -1,5 +1,9 @@
 package com.company.dao;
 
+import com.company.entity.Student;
+
+import java.util.List;
+
 /**
  * @author 数据库持久层对象
  * @version 1.0
@@ -11,7 +15,7 @@ package com.company.dao;
 public interface StudentDao {
     /**
      * 查询Student所有数据
-     * return selectStudents
+     * @return selectStudents
      */
-    void selectStudents();
+    List<Student> selectStudents();
 }
