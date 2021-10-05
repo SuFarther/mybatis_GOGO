@@ -1,24 +1,24 @@
-package com.company.po;
+package com.company.entity;
 
 /**
  * @author 苏东坡
  * @version 1.0
- * @ClassName StudentPO
+ * @ClassName Student
  * @company 公司
  * @Description StudentPO实体类,对应数据库里面的字段
  * @createTime 2021年10月05日 22:09:09
  */
-public class StudentPO {
+public class Student {
     private  Integer id;
     private  String name;
     private  String email;
     private  Integer age;
 
-    public StudentPO(){
+    public Student(){
 
     }
 
-    public StudentPO(Integer id, String name, String email, Integer age) {
+    public Student(Integer id, String name, String email, Integer age) {
         this.id = id;
         this.name = name;
         this.email = email;
