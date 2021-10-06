@@ -18,4 +18,27 @@ public interface StudentDao {
      * @return selectStudents
      */
     List<Student> selectStudents();
+
+    /**
+     * 增加Student全部数据
+     * @param student
+     * @return  insertStudent
+     */
+    int insertStudent(Student student);
+
+
+    /**
+     * 修改Student数据
+     * @param student
+     * @return  updateStudent
+     */
+    int updateStudent(Student student);
+
+
+    /**
+     * 根据ID删除student数据
+     * @param student
+     * @return  deleteStudentById
+     */
+     int deleteStudentById(Student student);
 }
