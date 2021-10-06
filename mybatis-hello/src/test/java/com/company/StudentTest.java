@@ -25,16 +25,18 @@ public class StudentTest {
         String config = "mybatis.xml";
         InputStream in = Resources.getResourceAsStream(config);
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
-        SqlSession sqlSession = factory.openSession();
+        //默认是非自动提交事务
+//        SqlSession sqlSession = factory.openSession();
+        SqlSession sqlSession = factory.openSession(true);
         String sqlId = "com.company.dao.StudentDao.insertStudent";
         Student student = new Student();
-        student.setId(3);
+        student.setId(4);
         student.setName("小芳");
         student.setEmail("xf@qq.com");
         student.setAge(24);
         int result = sqlSession.insert(sqlId, student);
         //mybatis默认不是自动提交事务,所以在insert,update,delete要手动提交事务
-        sqlSession.commit();
+//        sqlSession.commit();
         System.out.println("增加"+result+"条数据成功");
         sqlSession.close();
     }
