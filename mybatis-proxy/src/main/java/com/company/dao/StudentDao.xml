@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.dao.StudentDao">
+
+    <!--查询所有数据-->
+    <select id="selectAllStudents" resultType="com.company.domain.Student">
+      select id,name,email,age from  student order by id;
+   </select>
+
+
+    <!--增加Student数据-->
+    <insert id="addStudent">
+        insert into student values(#{id},#{name},#{email},#{age})
+    </insert>
+
+    <!--修改Student数据-->
+    <update id="updateStudentById">
+       update student set name=#{name},email=#{email},age=#{age} where id=#{id}
+    </update>
+
+    <!--通过id删除Student-->
+    <delete id="deleteStudentsById">
+        delete from student where id=#{id}
+    </delete>
+</mapper>
