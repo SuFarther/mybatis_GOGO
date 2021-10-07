@@ -31,13 +31,13 @@
   -->
 <mapper namespace="com.company.dao.StudentDao">
    <select id="selectStudentById" resultType="com.company.domain.Student" parameterType="java.lang.Integer">
-         select id,name,email,age from  Student where id=#{id}
+         select id,name,email,age from  student where id=#{id}
    </select>
 
 
     <!--命名参数 多个参数,使用@Param参数名-->
     <select id="selectNameOrAgeParams" resultType="com.company.domain.Student">
-        select id,name,email,age from  Student where name=#{myName} or age=#{myAge};
+        select id,name,email,age from  student where name=#{myName} or age=#{myAge};
     </select>
 
 
@@ -56,18 +56,18 @@
 <!--    </select>-->
 
     <select id="selectParamNameOrParamAge" resultType="com.company.domain.Student">
-        select id,name,email,age from  Student  where name=#{paramName} or age=#{paramAge}
+        select id,name,email,age from  student  where name=#{paramName} or age=#{paramAge}
     </select>
 
     <!--多个参数使用位置-->
     <select id="selectPosition" resultType="com.company.domain.Student">
-        select id,name,email,age from  Student  where name=#{arg0} or age=#{arg1}
+        select id,name,email,age from  student  where name=#{arg0} or age=#{arg1}
     </select>
 
 
     <!--多个参数,使用map,使用语法 #{map的key}-->
     <select id="selectMap" resultType="com.company.domain.Student">
-        select id,name,email,age from  Student where name=#{myName} or age=#{myAge};
+        select id,name,email,age from  student where name=#{myName} or age=#{myAge};
     </select>
 
 
@@ -93,7 +93,7 @@
 
     -->
     <select id="selectMapById" resultType="java.util.HashMap">
-        select id,name,email,age from  Student where id=#{stuid}
+        select id,name,email,age from  student where id=#{stuid}
     </select>
 
 
@@ -117,6 +117,40 @@
     </resultMap>
 
     <select id="selectAllStudent" resultMap="StudentMap">
-        select id,name,email,age from  Student
+        select id,name,email,age from  student
     </select>
+
+
+    <resultMap id="myStudent" type="com.company.domain.MyStudent">
+        <id column="id" property="stuid"/>
+        <id column="name" property="stuname"/>
+        <id column="email" property="stuemail"/>
+        <id column="age" property="stuage"/>
+    </resultMap>
+
+    <!--第一种:解决列名和属性名不同的问题-->
+    <select id="selectMyStudent" resultMap="myStudent">
+        select id,name,email,age from  student
+    </select>
+
+    <!--解决列名和属性名不一样的问题二:
+      resultType默认原则是:  同名的列值赋值给同名的属性使用列别名(java对象属性名)
+      推荐这种
+    -->
+    <select id="selectMyStudentOfResultType" resultType="com.company.domain.MyStudent">
+        select id as stuid,name as stuname,email as stuemail,age as stuage from  Student
+    </select>
+
+    <!--第一种like，java代码指定 like的内容-->
+    <select id="selectLikeOne" resultType="com.company.domain.Student">
+        select id,name,email,age from  student where  name like #{name}
+    </select>
+
+
+    <!--第二种方式: 在mapper文件中拼接like内容-->
+    <select id="selectLikeTwo" resultType="com.company.domain.Student">
+        select id,name,email,age from  student where  name like "%" #{name}  "%"
+    </select>
+
+
 </mapper>

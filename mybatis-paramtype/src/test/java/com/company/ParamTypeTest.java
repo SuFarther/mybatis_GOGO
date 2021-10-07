@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.dao.StudentDao;
+import com.company.domain.MyStudent;
 import com.company.domain.Student;
 import com.company.utils.MybatisUtils;
 import com.company.vo.QueryParamsVO;
@@ -112,6 +113,46 @@ public class ParamTypeTest {
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
         List<Student> students = dao.selectAllStudent();
         students.forEach(stu-> System.out.println("学生:"+stu));
+        MybatisUtils.closeSqlSession();
+    }
+
+    @Test
+    public void testSelectMyStudent(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+        List<MyStudent> myStudents = dao.selectMyStudent();
+        myStudents.forEach(stu-> System.out.println("学生："+stu));
+        MybatisUtils.closeSqlSession();
+    }
+
+    @Test
+    public void testSelectMyStudentOfResultType(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+        List<MyStudent> myStudents = dao.selectMyStudentOfResultType();
+        myStudents.forEach(stu-> System.out.println("学生："+stu));
+        MybatisUtils.closeSqlSession();
+    }
+
+
+    @Test
+    public void testSelectLikeOne(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+        String name="%李%";
+        List<Student> students = dao.selectLikeOne(name);
+        students.forEach(stu-> System.out.println("学生："+stu));
+        MybatisUtils.closeSqlSession();
+    }
+
+
+    @Test
+    public void testSelectLikeTwo(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+        String name="李";
+        List<Student> students = dao.selectLikeTwo(name);
+        students.forEach(stu-> System.out.println("学生："+stu));
         MybatisUtils.closeSqlSession();
     }
 }

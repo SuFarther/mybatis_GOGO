@@ -1,5 +1,6 @@
 package com.company.dao;
 
+import com.company.domain.MyStudent;
 import com.company.domain.Student;
 import com.company.vo.QueryParamsVO;
 import com.company.vo.ViewStudentVO;
@@ -94,5 +95,33 @@ public interface StudentDao {
      * @return
      */
     List<Student>   selectAllStudent();
+
+
+    /**
+     * 解决列名和属性吗不同的问题
+     * @return
+     */
+    List<MyStudent> selectMyStudent();
+
+
+    /**
+     * 解决列名和属性名不一样的问题
+     * @return
+     */
+    List<MyStudent> selectMyStudentOfResultType();
+
+    /**
+     * 第一种模糊查询,在java代码指定 like的内容
+     * @return  List<Student> selectLikeOne
+     */
+    List<Student> selectLikeOne(String name);
+
+
+    /**
+     * name就是李值,在mapper中拼接 like "%"李"%"
+     * @param name
+     * @return
+     */
+    List<Student> selectLikeTwo(String name);
 
 }
