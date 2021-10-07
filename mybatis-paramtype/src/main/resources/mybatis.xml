@@ -7,6 +7,27 @@
     <settings>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
+
+    <!--定义别名-->
+<!--    <typeAliases>-->
+<!--        &lt;!&ndash;-->
+<!--         第一种方式:-->
+<!--        可以指定一个类型一个自定义别名-->
+<!--          type: 自定义类型的全限定名称-->
+<!--          alias:别名(短小,容易记忆的)-->
+<!--        &ndash;&gt;-->
+<!--        <typeAlias type="com.company.domain.Student" alias="stu"/>-->
+<!--        <typeAlias type="com.company.vo.ViewStudentVO" alias="vStu"/>-->
+
+<!--        &lt;!&ndash;第二种方式-->
+<!--         <package>  name是包名, 这个包中所有类,类名就是别名(类名不区分大小写)-->
+<!--        类名 直接是类名 resultType="Student"-->
+<!--        &ndash;&gt;-->
+<!--        <package name="com.company.domain"/>-->
+<!--        <package name="com.company.vo"/>-->
+<!--    </typeAliases>-->
+
+
     <environments default="mysql">
         <environment id="mysql">
             <transactionManager type="JDBC"></transactionManager>

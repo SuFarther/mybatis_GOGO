@@ -2,6 +2,7 @@ package com.company.dao;
 
 import com.company.domain.Student;
 import com.company.vo.QueryParamsVO;
+import com.company.vo.ViewStudentVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -61,5 +62,37 @@ public interface StudentDao {
      * @return List<Student>
      */
     List<Student> selectMap(Map<String,Object> map);
+
+    /**
+     * resultType结果类型,指sql语句执行完毕后,数据转为java对象
+     *
+     * @param id
+     * @return  ViewStudentVO selectViewStudentVO
+     */
+    ViewStudentVO selectViewStudentVO(@Param("sid") Integer id);
+
+
+
+
+    /**
+     * resultType结果类型，也可以是1、类型的全限定名称 2、类型的别名, 例如 java.lang.Integer别名是int
+     * @return   int selectCount
+     */
+    int selectCount();
+
+
+    /***
+     * 定义方法返回map
+     * @param id
+     * @return
+     */
+    Map<Object,Object> selectMapById(Integer id);
+
+
+    /**
+     * 使用resultMap映射关系
+     * @return
+     */
+    List<Student>   selectAllStudent();
 
 }

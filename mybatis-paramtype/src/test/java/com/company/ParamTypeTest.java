@@ -4,6 +4,7 @@ import com.company.dao.StudentDao;
 import com.company.domain.Student;
 import com.company.utils.MybatisUtils;
 import com.company.vo.QueryParamsVO;
+import com.company.vo.ViewStudentVO;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
@@ -75,6 +76,42 @@ public class ParamTypeTest {
         for (Student stu: students){
             System.out.println("学生的信息:"+stu);
         }
+        MybatisUtils.closeSqlSession();
+    }
+
+
+    @Test
+    public void testSelectViewStudentVO(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+        ViewStudentVO viewStudentVO = dao.selectViewStudentVO(1002);
+        System.out.println("查询的学生1002id:"+viewStudentVO);
+        MybatisUtils.closeSqlSession();
+    }
+
+    @Test
+    public void testSelectCount(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+        System.out.println("学生数量："+dao.selectCount());
+        MybatisUtils.closeSqlSession();
+    }
+
+    @Test
+    public void testSelectMapById(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+        Map<Object, Object> map = dao.selectMapById(1002);
+        System.out.println("1002map:"+map);
+        MybatisUtils.closeSqlSession();
+    }
+
+    @Test
+    public void testSelectAllStudent(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+        List<Student> students = dao.selectAllStudent();
+        students.forEach(stu-> System.out.println("学生:"+stu));
         MybatisUtils.closeSqlSession();
     }
 }

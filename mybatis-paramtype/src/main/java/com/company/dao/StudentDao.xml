@@ -69,4 +69,54 @@
     <select id="selectMap" resultType="com.company.domain.Student">
         select id,name,email,age from  Student where name=#{myName} or age=#{myAge};
     </select>
+
+
+    <!--resultType结果类型,指sql语句执行完毕后,数据转为java对象-->
+    <select id="selectViewStudentVO" resultType="com.company.vo.ViewStudentVO">
+        select id,name,email,age from  Student where id=#{sid};
+    </select>
+
+
+    <!--resultType结果类型，也可以是java的类型,或者java类的全限定名称
+         <select id="selectCount" resultType="int"></select>
+    -->
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(1) from student;
+    </select>
+
+    <!--定义方法返回map
+      1)列名是map的key,列值是map的value
+      2)只能最多返回一行
+      resultMap:结果映射, 指定列名和java对象的属性对应关系
+      1）你自定义列值赋值给哪个属性
+      2）当你的列名属性名不一样时,一定使用resultMap
+
+    -->
+    <select id="selectMapById" resultType="java.util.HashMap">
+        select id,name,email,age from  Student where id=#{stuid}
+    </select>
+
+
+    <!--
+      使用resultMap
+      （1）先定义resultMap
+       (2) 在select标签,使用resultMap来定义
+
+     定义resultMap
+       id:自定义名称,表示你定义的resultMap
+       type: java类型的全限定名称
+       列名和java属性的关系
+       column:列名
+       property:java类型的属性名
+    -->
+    <resultMap id="StudentMap" type="com.company.domain.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="age" property="age"/>
+    </resultMap>
+
+    <select id="selectAllStudent" resultMap="StudentMap">
+        select id,name,email,age from  Student
+    </select>
 </mapper>
