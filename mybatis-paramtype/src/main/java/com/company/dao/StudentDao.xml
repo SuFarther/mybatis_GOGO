@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--parameterType:写在mapper文件中的一个属性。表示dao接口中方法的参数的数据类型
+   parameterType它的值是java的数据类型全限定名称或者是mybatis定义的别名
+
+  注意:parameterType不是强制的,mybatis可以通过通过反射机构能够发现接口参数的数类型。所以可以没有 一般我们不写
+  使用#{}之后,mybatis执行sql是使用的jdbc中的PreparedStatement对象
+  由mybatis下面的代码:
+   1、mybatis创建Connection，PreparedStatement对象
+   String sql =  select id,name,email,age from  Student where id=?
+   PreparedStatement pst = conn.preparedStatement(sql);
+   pst.setInt(1,1001);
+
+
+   2、执行sql封装为resultType= "com.company.domain.Student"这个对象
+   ResultSet  rs = ps.executeQuery();
+   Studnet student = null;
+   while(rs.next){
+    //从数据库取表的一行数据,存到一个java对象属性中
+    Student  student =new Student();
+    student.setId(rs.getInt("id"));
+    student.setName(rs.getString("name"));
+    student.setEmail(rs.getString("email"));
+    student.setAge(rs.getInt("age"));
+   }
+
+   return student; //给dao方法调用的返回值
+  -->
+<mapper namespace="com.company.dao.StudentDao">
+   <select id="selectStudentById" resultType="com.company.domain.Student" parameterType="java.lang.Integer">
+         select id,name,email,age from  Student where id=#{id}
+   </select>
+
+
+    <!--命名参数 多个参数,使用@Param参数名-->
+    <select id="selectNameOrAgeParams" resultType="com.company.domain.Student">
+        select id,name,email,age from  Student where name=#{myName} or age=#{myAge};
+    </select>
+
+
+    <!--
+      对象传参,使用java对象的数学值,作为参数实际值
+      使用对象语法:#{属性名,javaType=类型名称,jdbcType=数据类型
+      javaType：指 java实体类的属性类型
+      jdbcType:指这个java实体类的字段对应数据库这个字段的数据库类型,很少用
+
+      我们使用简化方式:#{属性名},javaType,jdbcType的值mybatis反射能获取。不用提供
+    -->
+<!--    <select id="selectParamNameOrParamAge" resultType="com.company.domain.Student">-->
+<!--        select id,name,email,age from  Student-->
+<!--        where name=#{paramName,javaType=java.lang.String,jdbcType=VARCHAR} or-->
+<!--        age=#{paramAge,javaType=java.lang.Integer,jdbcType=INTEGER}-->
+<!--    </select>-->
+
+    <select id="selectParamNameOrParamAge" resultType="com.company.domain.Student">
+        select id,name,email,age from  Student  where name=#{paramName} or age=#{paramAge}
+    </select>
+
+    <!--多个参数使用位置-->
+    <select id="selectPosition" resultType="com.company.domain.Student">
+        select id,name,email,age from  Student  where name=#{arg0} or age=#{arg1}
+    </select>
+
+
+    <!--多个参数,使用map,使用语法 #{map的key}-->
+    <select id="selectMap" resultType="com.company.domain.Student">
+        select id,name,email,age from  Student where name=#{myName} or age=#{myAge};
+    </select>
+</mapper>
