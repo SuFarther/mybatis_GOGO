@@ -4,21 +4,52 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+
+    <!--指定properties文件的文件的位置,从类路径根开始找文件-->
+    <properties resource="jdbc.properties"/>
+
     <settings>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
     <environments default="mysql">
         <environment id="mysql">
+            <!--
+            transactionManager:mybatis提交事务,回顾事务的方式
+            type: 事务的处理的类型
+            1)  JDBC: 表示mybatis底层调用JDBC中的Connection对象,commit,,rollback
+            2)  MANAGED: 把mybatis的事务处理委托给其它得到容器(一个服务器软件,一个框架(Spring))
+            -->
             <transactionManager type="JDBC"></transactionManager>
+            <!--
+            dataSource: 表示数据源,java体系中,规定实现了javax.sql.DataSource接口的都是数据源
+            数据源表示Connection对象的
+
+            type: 指定数据源的类型
+            1) POOLED: 使用连接池,mybatis会创建PooledDataSource类
+            2）UNPOOLED: 不实用连接池,在每次执行sql语句,先创建连接,执行sql,在关闭连接
+            mybatis会创建一个UnPooledDataSource,管理Connection对象的使用
+            3) JNDI: java命名和目录服务(windows注册表)
+            -->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT"/>
-                <property name="username" value="root"/>
-                <property name="password" value="123456"/>
+                <property name="driver" value="${database.driver}"/>
+                <property name="url" value="${database.url}"/>
+                <property name="username" value="${database.username}"/>
+                <property name="password" value="${database.password}"/>
             </dataSource>
         </environment>
     </environments>
     <mappers>
-        <mapper resource="com/company/dao/StudentDao.xml"></mapper>
+        <!--第一种方式: 指定多个mapper文件-->
+<!--        <mapper resource="com/company/dao/StudentDao.xml"></mapper>-->
+<!--        <mapper resource="com/company/dao/OrderDao.xml"></mapper>-->
+
+        <!--
+          第二种方式: 使用包名
+            name： xml文件(mapper文件) 所在的包名,这个包中所有的xml文件一次都能加载给mybatis
+            使用package的要求:
+            1、mapper文件名称需要和接口名称一样,区分大小写的一样
+            2、mapper文件和dao接口需要在同一目录
+        -->
+        <package name="com.company.dao"/>
     </mappers>
 </configuration>

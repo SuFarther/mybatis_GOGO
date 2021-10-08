@@ -13,7 +13,7 @@ import java.util.List;
  * @Description TODO
  * @createTime 2021年10月06日 21:42:42
  */
-public interface StudentDao {
+public interface OrderDao {
 
     /**
      * 动态sql,使用java对象作为参数
