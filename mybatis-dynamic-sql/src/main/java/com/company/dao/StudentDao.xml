@@ -71,4 +71,9 @@
         </foreach>
         )
     </select>
+
+    <!--查询所有,测试分页-->
+    <select id="selectAll" resultType="com.company.domain.Student">
+        <include refid="studentSql"/> order  by id
+    </select>
 </mapper>

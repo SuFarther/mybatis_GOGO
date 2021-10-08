@@ -17,6 +17,12 @@
   </properties>
 
   <dependencies>
+    <!--PageHelper依赖-->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.3.0</version>
+    </dependency>
     <!--mybatis依赖-->
     <dependency>
       <groupId>org.mybatis</groupId>

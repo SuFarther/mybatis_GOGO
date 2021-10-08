@@ -1,6 +1,7 @@
 import com.company.dao.StudentDao;
 import com.company.domain.Student;
 import com.company.utils.MybatisUtils;
+import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
@@ -79,6 +80,20 @@ public class TestDyMySql {
 
         List<Student> students = dao.selectForeachByStudent(studentList);
         students.forEach(stu-> System.out.println("学生:"+stu));
+        MybatisUtils.closeSqlSession();
+    }
+
+
+    @Test
+    public void testSelectAllPageHelper(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+        //加入PageHelper方法,分页
+        //  PageNum: 第几页,从1开始
+        // pageSize: 一页中有多少行数据
+        PageHelper.startPage(1,3);
+        List<Student> students = dao.selectAll();
+        students.forEach(stu-> System.out.println("学生:"+students));
         MybatisUtils.closeSqlSession();
     }
 }

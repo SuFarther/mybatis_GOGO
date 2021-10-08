@@ -45,4 +45,10 @@ public interface StudentDao {
      * @return
      */
     List<Student> selectForeachByStudent(List<Student> stuList);
+
+
+    /**
+     * 使用PageHelper分页数据
+     */
+    List<Student> selectAll();
 }
